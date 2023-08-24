@@ -1,0 +1,21 @@
+﻿@model Blogger.Domain.ViewModels.AuthModel;
+@{
+    ViewBag.Title = "Login";
+}
+<div class="row d-flex justify-content-center align-items-center loginForm">
+    <form asp-controller="Account" asp-action="Login" method="post" class="col-md-6" asp-route-returnUrl="@ViewBag.ReturnUrl">
+        <h1 class="my-3">Login</h1>
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label required"></label>
+            <input type="text" class="form-control" asp-for="Email">
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label required">Password</label>
+            <input type="password" class="form-control" asp-for="Password">
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>

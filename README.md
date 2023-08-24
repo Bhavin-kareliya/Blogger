@@ -28,3 +28,37 @@ ASP.NET Web app for blog management using ADO.NET with SQL Server
 
 - Email: bhavin@gmail.com
 - Pass: 123
+
+## Screenshots
+| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/7295ceb7-81b0-488c-8f2f-6b65e8124051) |
+|:--:| 
+| *WEB API* |
+
+| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/1a4df396-cc36-4d6d-a592-05264046747d) |
+|:--:| 
+| *API Authorization* |
+
+| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/9960f154-1f23-44d1-8368-8809866727f7) |
+|:--:| 
+| *List of posts for everyone (Only published posts)* |
+
+| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/ac0c6192-f54a-4c3c-b4bd-e7d6147016e6) |
+|:--:| 
+| *Login page with validations* |
+
+| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/251a3e22-7970-40d2-9fd7-abdb4da6b52a) |
+|:--:| 
+| *User dashboard for post management (Published and draft both)* |
+
+| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/86f38183-1eb0-404a-a79a-5eaed622e624) |
+|:--:| 
+| *Detailed view of single post* |
+
+| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/24508fe2-9b05-48e3-9388-2e5eb9ceb536) |
+|:--:| 
+| *Create/Edit post* |
+
+| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/4d5b1fb0-1c73-47bf-8b3d-affaf78985ca) |
+|:--:| 
+| *404 Error page* |
+

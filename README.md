@@ -1,3 +1,4 @@
+
 # Blogger
 
 ASP.NET Web app for blog management using ADO.NET with SQL Server
@@ -50,7 +51,7 @@ ASP.NET Web app for blog management using ADO.NET with SQL Server
 |:--:| 
 | *User dashboard for post management (Published and draft both)* |
 
-| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/86f38183-1eb0-404a-a79a-5eaed622e624) |
+| ![image](https://github.com/Bhavin-kareliya/Blogger/assets/54073491/9dc003ba-1516-418f-bd42-53c8fe4c6e36) |
 |:--:| 
 | *Detailed view of single post* |
 

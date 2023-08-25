@@ -59,7 +59,7 @@ public class AccountController : Controller
             List<Claim> claims = new List<Claim>() {
                                         new Claim(ClaimTypes.Email, data.User.Email),
                                         new Claim(ClaimTypes.Name, data.User.Name),
-                                        new Claim("UserId", data.User.Id.ToString()),
+                                        new Claim("Id", data.User.Id.ToString()),
                                         new Claim("Token", data.JWT)
                                     };
 

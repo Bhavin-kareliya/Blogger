@@ -1,4 +1,5 @@
 ﻿@model Blogger.Domain.ViewModels.PostDetailModel;
+@inject IWebHostEnvironment _hostingEnvironment;
 
 @{
     ViewData["Title"] = "View";
@@ -9,7 +10,21 @@
 <div>
 
     <hr />
+    @if (Model.FilePath is not null)
+    {
+        @if (Model.FilePath.Contains(".mp4"))
+        {
+            <video controls="controls" autoplay>
+                <source src="~/videos/@Model.FilePath" type="video/mp4" class="img-thumbnail rounded w-50" />
+            </video>
+        }
+        else
+        {
+            <img src="~/images/@Model.FilePath" alt="Not found" class="img-thumbnail rounded w-50" />
+        }
+    }
     <dl class="row">
+        
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
         </dt>

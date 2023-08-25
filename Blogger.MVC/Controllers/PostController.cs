@@ -24,7 +24,7 @@ namespace Blogger.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> MyPosts()
         {
-            int id = Convert.ToInt32(User.FindFirstValue("UserId"));
+            int id = Convert.ToInt32(User.FindFirstValue("Id"));
             List<Post>? posts = await _httpClient.GetFromJsonAsync<List<Post>>($"post/GetByUserId/{id}");
             return View(posts);
         }
@@ -49,7 +49,7 @@ namespace Blogger.MVC.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new PostModel());
+            return View(new CreatePostModel());
         }
 
         /// <summary>
@@ -59,11 +59,36 @@ namespace Blogger.MVC.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync(PostModel post)
+        public async Task<IActionResult> CreateAsync(CreatePostModel post)
         {
+            string? fileName = null;
             if (!ModelState.IsValid) return View(post);
 
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("post/create", post);
+            if (post.File is not null)
+            {
+                if (post.File.Length > 5000000)
+                    return BadRequest("File size must be less than 5Mb");
+                else if (post.File.ContentType != "image/jpeg" && post.File.ContentType != "image/jpg" && post.File.ContentType != "image/png" && post.File.ContentType != "video/mp4")
+                    return BadRequest("The file format is invalid!. Please select JPEG, JPG, PNG, MP4 files.");
+
+                fileName = $"{Guid.NewGuid()}_{post.File.FileName}";
+                string filepath = Path.Combine(Directory.GetCurrentDirectory(), (post.File.ContentType == "video/mp4") ? @"wwwroot\videos" : @"wwwroot\images", fileName);
+                using (var stream = System.IO.File.Create(filepath))
+                {
+                    await post.File!.CopyToAsync(stream);
+                }
+            }
+
+            Post postModel = new()
+            {
+                Title = post.Title,
+                Content = post.Content,
+                FilePath = fileName,
+                IsPublished = post.IsPublished,
+                CreatedBy = Convert.ToInt32(User.FindFirst("Id")!.Value)
+            };
+
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("post/create", postModel);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 return RedirectToAction("MyPosts");

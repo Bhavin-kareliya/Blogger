@@ -34,9 +34,10 @@ public class PostRepository : IPostRepository
                     Id = Convert.ToInt32(reader["Id"]),
                     Title = reader["Title"].ToString()!,
                     Content = reader["Content"].ToString(),
-                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
+                    FilePath = (reader["FilePath"] is not DBNull) ? reader["FilePath"].ToString() : null,
                     PublishedAt = (reader["PublishedAt"] is not DBNull) ? Convert.ToDateTime(reader["PublishedAt"]) : null,
                     IsPublished = Convert.ToBoolean(reader["IsPublished"]),
+                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
                     CreatedBy = Convert.ToInt32(reader["CreatedBy"]),
                 };
                 posts.Add(p);
@@ -66,9 +67,10 @@ public class PostRepository : IPostRepository
                     Id = Convert.ToInt32(reader["Id"]),
                     Title = reader["Title"].ToString()!,
                     Content = reader["Content"].ToString(),
-                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
+                    FilePath = (reader["FilePath"] is not DBNull) ? reader["FilePath"].ToString() : null,
                     PublishedAt = (reader["PublishedAt"] is not DBNull) ? Convert.ToDateTime(reader["PublishedAt"]) : null,
                     IsPublished = Convert.ToBoolean(reader["IsPublished"]),
+                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
                     CreatedBy = Convert.ToInt32(reader["CreatedBy"]),
                 };
                 posts.Add(p);
@@ -96,9 +98,10 @@ public class PostRepository : IPostRepository
                     Id = Convert.ToInt32(reader["Id"]),
                     Title = reader["Title"].ToString()!,
                     Content = reader["Content"].ToString(),
-                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
+                    FilePath = (reader["FilePath"] is not DBNull) ? reader["FilePath"].ToString() : null,
                     PublishedAt = (reader["PublishedAt"] is not DBNull) ? Convert.ToDateTime(reader["PublishedAt"]) : null,
                     IsPublished = Convert.ToBoolean(reader["IsPublished"]),
+                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
                     CreatedBy = Convert.ToInt32(reader["CreatedBy"]),
                     Author = reader["Author"].ToString()!
                 };
@@ -110,15 +113,16 @@ public class PostRepository : IPostRepository
         return null;
     }
 
-    public async Task<int> InsertPost(PostModel post, int createdBy)
+    public async Task<int> InsertPost(Post post)
     {
         string query = "usp_InsertPost";
         SqlCommand cmd = new SqlCommand(query, _connection);
         cmd.CommandType = CommandType.StoredProcedure;
         cmd.Parameters.AddWithValue("@pTitle", post.Title);
         cmd.Parameters.AddWithValue("@pContent", post.Content);
+        cmd.Parameters.AddWithValue("@pFilePath", post.FilePath);
         cmd.Parameters.AddWithValue("@pIsPublished", post.IsPublished);
-        cmd.Parameters.AddWithValue("@pCreatedBy", createdBy);
+        cmd.Parameters.AddWithValue("@pCreatedBy", post.CreatedBy);
 
         await _connection.OpenAsync();
         int postId = (int)(await cmd.ExecuteScalarAsync())!;

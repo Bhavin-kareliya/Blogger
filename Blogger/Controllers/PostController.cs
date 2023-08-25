@@ -3,7 +3,7 @@ using Blogger.Domain.Models;
 using Blogger.Domain.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+using Microsoft.Extensions.FileProviders;
 
 namespace Blogger.Controllers
 {
@@ -64,10 +64,10 @@ namespace Blogger.Controllers
         /// <param name="post"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Create(PostModel post)
+        public async Task<IActionResult> Create(Post post)
         {
-            var userId = Convert.ToInt32(User.FindFirst("Id")!.Value);
-            int id = await _blogRepository.InsertPost(post, userId);
+            if (!ModelState.IsValid) return BadRequest(post);
+            int id = await _blogRepository.InsertPost(post);
             if (id == 0) return BadRequest("Something went wrong while creating post!");
             return Ok($"Post created with id={id} successfully !");
         }

@@ -30,7 +30,7 @@ public interface IPostRepository
     /// <param name="post"></param>
     /// <param name="createdBy">User ID</param>
     /// <returns>Inserted PostID</returns>
-    Task<int> InsertPost(PostModel post, int createdBy);
+    Task<int> InsertPost(Post post);
 
     /// <summary>
     /// Update existing post details
